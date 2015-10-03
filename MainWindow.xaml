@@ -52,6 +52,8 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -60,10 +62,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="PathBox" VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False"/>
-            <Button x:Name="SelectButton" Content="{DynamicResource SelectDirectory}" Click="SelectButton_Click" Grid.Column="3"/>
+            <TextBox x:Name="DirectoryBox" VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False" Text="{Binding Directory}"/>
+            <Button x:Name="DirectoryButton" Content="{DynamicResource SelectDirectory}" Click="DirectoryButton_Click" Grid.Column="3"/>
         </Grid>
-        <DataGrid x:Name="PreviewGrid" Grid.Row="1" Grid.RowSpan="8" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Questions}">
+        <DataGrid x:Name="PreviewGrid" Grid.Row="1" Grid.RowSpan="9" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Questions}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
                 <DataGridTemplateColumn Header="Image" Width="1*">
@@ -84,7 +86,17 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid x:Name="OptionGrid" Grid.Row="9" IsEnabled="False">
+        <Grid Grid.Row="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="PathBox" VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Path}"/>
+            <Button x:Name="PathButton" Content="{DynamicResource SavePath}" Click="PathButton_Click" Grid.Column="3"/>
+        </Grid>
+        <Grid x:Name="OptionGrid" Grid.Row="11" IsEnabled="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -92,11 +104,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Content="Total:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
-            <Label x:Name="QuestionCount" Content="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
-            <RadioButton x:Name="SerialRadio" Content="Serial" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True" Checked="SerialRadio_Checked"/>
-            <RadioButton x:Name="RandomRadio" Content="Random" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Checked="RandomRadio_Checked"/>
-            <ScrollBar x:Name="CaseCount" Style="{DynamicResource Spinner}" Minimum="1" SmallChange="1" Grid.Column="2" IsEnabled="False"/>
-            <Button x:Name="StartButton" Content="Start Test" Grid.Column="3" Click="StartButton_Click"/>
+            <Label Content="{Binding Questions.Length, TargetNullValue=0}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
+            <RadioButton x:Name="SerialRadio" Content="Serial" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True"/>
+            <RadioButton x:Name="RandomRadio" Content="Random" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsRandom}"/>
+            <ScrollBar x:Name="CaseCount" Style="{DynamicResource Spinner}" Minimum="1" SmallChange="1" Grid.Column="2" IsEnabled="{Binding IsRandom}" Value="{Binding Items}"/>
+            <Button x:Name="StartButton" Content="Start Test" Grid.Column="3" Click="StartButton_Click" IsEnabled="False"/>
         </Grid>
     </Grid>
 </Window>

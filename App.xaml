@@ -6,7 +6,7 @@
     <Application.Resources>
 
         <System:String x:Key="SelectDirectory">Select Directory</System:String>
-        <System:String x:Key="PathText">Path</System:String>
+        <System:String x:Key="SavePath">Save Path</System:String>
 
     </Application.Resources>
 </Application>

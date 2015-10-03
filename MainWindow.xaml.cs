@@ -15,44 +15,42 @@ using System.Windows.Shapes;
 
 namespace ModelQuestion {
     public partial class MainWindow : Window {
-        private Question[] Questions;
+        private QuestionModel Model = new QuestionModel();
 
         public MainWindow() {
             InitializeComponent();
+            this.DataContext = Model;
         }
 
-        private void SelectButton_Click(object sender, RoutedEventArgs e) {
+        private void DirectoryButton_Click(object sender, RoutedEventArgs e) {
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                PathBox.Text = dialog.SelectedPath;
-                PreviewGrid.ItemsSource = Questions = QuestionLoader.LoadQuestion(dialog.SelectedPath);
-                QuestionCount.Content = Questions.Length;
-
-                if (Questions.Length == 0) {
+                Model.Directory = dialog.SelectedPath;
+                Model.Questions = QuestionLoader.LoadQuestion(dialog.SelectedPath);
+                
+                if (Model.Questions.Length == 0) {
                     OptionGrid.IsEnabled = false;
                     MessageBox.Show("No usable test case, the directory choosed is incorrect", "Incorrect directory", MessageBoxButton.OK, MessageBoxImage.Stop);
                 } else {
                     OptionGrid.IsEnabled = true;
-                    CaseCount.Maximum = CaseCount.Value = Questions.Length;
+                    CaseCount.Maximum = CaseCount.Value = Model.Questions.Length;
                 }
             }
         }
 
+        private void PathButton_Click(object sender, RoutedEventArgs e) {
+            System.Windows.Forms.SaveFileDialog dialog = new System.Windows.Forms.SaveFileDialog();
+            dialog.DefaultExt = "xlsx";
+            dialog.Filter = "Excel Worksheet (*.xlsx)|*.xlsx|Comma Separated Values (*.csv)|*.csv|Text Files (*.txt)|*.txt";
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                Model.Path = dialog.FileName;
+                StartButton.IsEnabled = true;
+            }
+        }
+
         private void StartButton_Click(object sender, RoutedEventArgs e) {
-            Console.Write(sender);
-            Console.WriteLine(e);
-        }
 
-        private void SerialRadio_Checked(object sender, RoutedEventArgs e) {
-            if (CaseCount != null) {
-                CaseCount.IsEnabled = false;
-            }
-        }
-
-        private void RandomRadio_Checked(object sender, RoutedEventArgs e) {
-            if (CaseCount != null) {
-                CaseCount.IsEnabled = true;
-            }
         }
     }
 }
