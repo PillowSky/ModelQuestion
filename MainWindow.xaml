@@ -65,7 +65,17 @@
             <TextBox x:Name="DirectoryBox" VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="False" Text="{Binding Directory}"/>
             <Button x:Name="DirectoryButton" Content="{DynamicResource SelectDirectory}" Click="DirectoryButton_Click" Grid.Column="3"/>
         </Grid>
-        <DataGrid x:Name="PreviewGrid" Grid.Row="1" Grid.RowSpan="9" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Questions}">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="PathBox" VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Path}"/>
+            <Button x:Name="PathButton" Content="{DynamicResource SavePath}" Click="PathButton_Click" Grid.Column="3"/>
+        </Grid>
+        <DataGrid x:Name="PreviewGrid" Grid.Row="2" Grid.RowSpan="9" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Questions}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Name}"/>
                 <DataGridTemplateColumn Header="Image" Width="1*">
@@ -86,17 +96,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="PathBox" VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Path}"/>
-            <Button x:Name="PathButton" Content="{DynamicResource SavePath}" Click="PathButton_Click" Grid.Column="3"/>
-        </Grid>
-        <Grid x:Name="OptionGrid" Grid.Row="11" IsEnabled="False">
+        <Grid x:Name="OptionGrid" Grid.Row="11" IsEnabled="{Binding IsReady}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -107,8 +107,8 @@
             <Label Content="{Binding Questions.Length, TargetNullValue=0}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
             <RadioButton x:Name="SerialRadio" Content="Serial" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True"/>
             <RadioButton x:Name="RandomRadio" Content="Random" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsRandom}"/>
-            <ScrollBar x:Name="CaseCount" Style="{DynamicResource Spinner}" Minimum="1" SmallChange="1" Grid.Column="2" IsEnabled="{Binding IsRandom}" Value="{Binding Items}"/>
-            <Button x:Name="StartButton" Content="Start Test" Grid.Column="3" Click="StartButton_Click" IsEnabled="False"/>
+            <ScrollBar x:Name="CaseCount" Style="{DynamicResource Spinner}" Minimum="1" Maximum="{Binding Questions.Length}" SmallChange="1" Grid.Column="2" IsEnabled="{Binding IsRandom}" Value="{Binding Items}"/>
+            <Button x:Name="StartButton" Content="Start Test" Grid.Column="3" Click="StartButton_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -7,17 +7,6 @@ using System.ComponentModel;
 
 namespace ModelQuestion {
     class QuestionModel : INotifyPropertyChanged {
-        private string _path;
-        public string Path {
-            get {
-                return _path;
-            }
-            set {
-                _path = value;
-                NotifyPropertyChanged("Path");
-            }
-        }
-
         private string _directory;
         public string Directory {
             get {
@@ -26,6 +15,19 @@ namespace ModelQuestion {
             set {
                 _directory = value;
                 NotifyPropertyChanged("Directory");
+                NotifyPropertyChanged("IsReady");
+            }
+        }
+
+        private string _path;
+        public string Path {
+            get {
+                return _path;
+            }
+            set {
+                _path = value;
+                NotifyPropertyChanged("Path");
+                NotifyPropertyChanged("IsReady");
             }
         }
 
@@ -36,7 +38,10 @@ namespace ModelQuestion {
             }
             set {
                 _questions = value;
+                _items = value.Length;
                 NotifyPropertyChanged("Questions");
+                NotifyPropertyChanged("Items");
+                NotifyPropertyChanged("IsReady");
             }
         }
 
@@ -72,6 +77,13 @@ namespace ModelQuestion {
                 NotifyPropertyChanged("Items");
             }
         }
+
+        public bool IsReady {
+            get {
+                return _questions != null && _questions.Length > 0 && _path != null;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChanged(string propertyName) {

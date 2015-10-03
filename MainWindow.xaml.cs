@@ -29,11 +29,7 @@ namespace ModelQuestion {
                 Model.Questions = QuestionLoader.LoadQuestion(dialog.SelectedPath);
                 
                 if (Model.Questions.Length == 0) {
-                    OptionGrid.IsEnabled = false;
                     MessageBox.Show("No usable test case, the directory choosed is incorrect", "Incorrect directory", MessageBoxButton.OK, MessageBoxImage.Stop);
-                } else {
-                    OptionGrid.IsEnabled = true;
-                    CaseCount.Maximum = CaseCount.Value = Model.Questions.Length;
                 }
             }
         }
@@ -45,7 +41,6 @@ namespace ModelQuestion {
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 Model.Path = dialog.FileName;
-                StartButton.IsEnabled = true;
             }
         }
 
