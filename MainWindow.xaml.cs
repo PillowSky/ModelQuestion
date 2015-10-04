@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 
 namespace ModelQuestion {
     public partial class MainWindow : Window {
-        private QuestionModel Model = new QuestionModel();
+        private QuestionModel Model;
 
         public MainWindow() {
             InitializeComponent();
-            this.DataContext = Model;
+            this.DataContext = Model = new QuestionModel();
         }
 
         private void DirectoryButton_Click(object sender, RoutedEventArgs e) {
@@ -45,7 +45,9 @@ namespace ModelQuestion {
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e) {
-
+            QuestionWindow window = new QuestionWindow(Model);
+            window.Show();
+            Hide();
         }
     }
 }

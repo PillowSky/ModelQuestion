@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 
 namespace ModelQuestion {
-    class QuestionModel : INotifyPropertyChanged {
+    public class QuestionModel : INotifyPropertyChanged {
         private string _directory;
         public string Directory {
             get {
@@ -38,21 +38,20 @@ namespace ModelQuestion {
             }
             set {
                 _questions = value;
-                _items = value.Length;
+                ProblemCount = value.Length;
                 NotifyPropertyChanged("Questions");
-                NotifyPropertyChanged("Items");
                 NotifyPropertyChanged("IsReady");
             }
         }
 
-        private Question[] _cases;
-        public Question[] Cases {
+        private Question[] _problems;
+        public Question[] Problems {
             get {
-                return _cases;
+                return _problems;
             }
             set {
-                _cases = value;
-                NotifyPropertyChanged("Cases");
+                _problems = value;
+                NotifyPropertyChanged("Problems");
             }
         }
 
@@ -67,14 +66,14 @@ namespace ModelQuestion {
             }
         }
 
-        private int _items;
-        public int Items {
+        private int _problemCount;
+        public int ProblemCount {
             get {
-                return _items;
+                return _problemCount;
             }
             set {
-                _items = value;
-                NotifyPropertyChanged("Items");
+                _problemCount = value;
+                NotifyPropertyChanged("ProblemCount");
             }
         }
 
