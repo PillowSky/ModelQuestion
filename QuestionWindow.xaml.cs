@@ -23,5 +23,21 @@ namespace ModelQuestion {
             InitializeComponent();
             this.DataContext = Model = model;
         }
+
+        private void Next_Click(object sender, RoutedEventArgs e) {
+            if (Model.Current.Selected == null) {
+                MessageBox.Show("Select a choice to continue", "Select a choice to continue", MessageBoxButton.OK, MessageBoxImage.Stop);
+            } else {
+                if (Model.Index + 1 < Model.ProblemCount) {
+                    Model.Index++;
+                }
+            }
+        }
+
+        private void Prev_Click(object sender, RoutedEventArgs e) {
+            if (Model.Index > 0) {
+                Model.Index--;
+            }
+        }
     }
 }

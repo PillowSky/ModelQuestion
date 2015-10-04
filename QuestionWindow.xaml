@@ -1,7 +1,57 @@
 ﻿<Window x:Class="ModelQuestion.QuestionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="QuestionWindow" Height="300" Width="300">
-    <Grid>
+        Title="QuestionWindow" Height="350" Width="525">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="Progress: {0} / {1}">
+                    <Binding Path="Index"></Binding>
+                    <Binding Path="ProblemMax"></Binding>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ProgressBar Grid.Row="0" Grid.Column="1" Value="{Binding Index}" Maximum="{Binding ProblemMax}"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding Current.ImageFile}" HorizontalAlignment="Center"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Current.Detail}"/>
+                <ComboBox Grid.Row="1" ItemsSource="{Binding Current.Choice}" SelectedValue="{Binding Current.Selected}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Prev" Content="Prev" Grid.Column="1" Click="Prev_Click"/>
+            <Button x:Name="Next" Content="Next" Grid.Column="2" Click="Next_Click"/>
+        </Grid>
     </Grid>
 </Window>

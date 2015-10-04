@@ -44,17 +44,6 @@ namespace ModelQuestion {
             }
         }
 
-        private Question[] _problems;
-        public Question[] Problems {
-            get {
-                return _problems;
-            }
-            set {
-                _problems = value;
-                NotifyPropertyChanged("Problems");
-            }
-        }
-
         private bool _isRandom;
         public bool IsRandom {
             get {
@@ -74,6 +63,13 @@ namespace ModelQuestion {
             set {
                 _problemCount = value;
                 NotifyPropertyChanged("ProblemCount");
+                NotifyPropertyChanged("ProblemMax");
+            }
+        }
+
+        public int ProblemMax {
+            get {
+                return _problemCount - 1;
             }
         }
 
@@ -83,6 +79,36 @@ namespace ModelQuestion {
             }
         }
 
+        public DateTime TimeBegin;
+        public DateTime TimeEnd;
+        public Answer[] Answers { get; set; }
+
+        private Answer _current;
+        public Answer Current {
+            get {
+                if (_current == null) {
+                    return Answers[0];
+                } else {
+                    return _current;
+                }
+            }
+            set {
+                _current = value;
+                NotifyPropertyChanged("Current");
+            }
+        }
+
+        private int _index;
+        public int Index {
+            get {
+                return _index;
+            }
+            set {
+                _index = value;
+                Current = Answers[value];
+                NotifyPropertyChanged("Index");
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChanged(string propertyName) {
