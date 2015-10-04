@@ -39,5 +39,13 @@ namespace ModelQuestion {
                 Model.Index--;
             }
         }
+
+        private void Submit_Click(object sender, RoutedEventArgs e) {
+            if (MessageBox.Show("Are you sure to submit?", "Are you sure to sumit?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+                foreach (var a in Model.Answers) {
+                    Console.WriteLine(a.Selected);
+                }
+            }
+        }
     }
 }
