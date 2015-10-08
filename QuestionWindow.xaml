@@ -47,7 +47,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Prev" Content="Prev" Grid.Column="1" Click="Prev_Click"/>
+            <Button x:Name="Prev" Content="Prev" Grid.Column="1" Click="Prev_Click" IsEnabled="{Binding Index}"/>
             <Button x:Name="Next" Content="Next" Grid.Column="3" Click="Next_Click"/>
         </Grid>
     </Grid>

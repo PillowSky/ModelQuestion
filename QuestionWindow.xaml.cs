@@ -17,7 +17,7 @@ namespace ModelQuestion {
     /// Interaction logic for QuestionWindow.xaml
     /// </summary>
     public partial class QuestionWindow : Window {
-        public QuestionModel Model;
+        private QuestionModel Model;
 
         public QuestionWindow(QuestionModel model) {
             InitializeComponent();
@@ -27,16 +27,16 @@ namespace ModelQuestion {
 
         private void Next_Click(object sender, RoutedEventArgs e) {
             if (Model.Current.Selected == null) {
-                MessageBox.Show("Select a choice to continue", "Select a choice to continue", MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("Please select to continue", "Please select to continue", MessageBoxButton.OK, MessageBoxImage.Stop);
             } else {
                 if (Model.Index + 1 < Model.QuestionCount) {
                     Model.Index++;
                 } else {
                     if (MessageBox.Show("Are you sure to submit?", "Are you sure to sumit?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
                         Model.TimeEnd = DateTime.Now;
-                        foreach (var a in Model.Questions) {
-                            Console.WriteLine(a.Selected);
-                        }
+                        QuestionIO.StoreQuestion(Model);
+                        MessageBox.Show("Test result saved to " + Model.Path, "Test result saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Close();
                     }
                 }
             }

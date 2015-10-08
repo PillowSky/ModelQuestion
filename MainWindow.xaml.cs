@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace ModelQuestion {
     public partial class MainWindow : Window {
-        public QuestionModel Model;
+        private QuestionModel Model;
 
         public MainWindow() {
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace ModelQuestion {
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 Model.Directory = dialog.SelectedPath;
-                Model.Questions = Question.LoadQuestion(dialog.SelectedPath);
+                Model.Questions = QuestionIO.LoadQuestion(dialog.SelectedPath);
                 
                 if (Model.Questions.Length == 0) {
                     MessageBox.Show("No available test case, the directory choosed is incorrect", "Incorrect directory", MessageBoxButton.OK, MessageBoxImage.Stop);

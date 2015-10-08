@@ -72,6 +72,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Question.cs" />
+    <Compile Include="QuestionIO.cs" />
     <Compile Include="QuestionModel.cs" />
     <Compile Include="QuestionWindow.xaml.cs">
       <DependentUpon>QuestionWindow.xaml</DependentUpon>
