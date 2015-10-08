@@ -64,6 +64,7 @@ namespace ModelQuestion {
             set {
                 _index = value;
                 NotifyPropertyChanged("Index");
+                NotifyPropertyChanged("NatureIndex");
                 Current = _questions[value];
             }
         }
@@ -98,14 +99,17 @@ namespace ModelQuestion {
             }
         }
 
-        public int QuestionMax {
+        public int NatureIndex {
             get {
-                return _questionCount - 1;
+                return _index + 1;
+            }
+            set {
+                Index = value - 1;
             }
         }
 
-        //public DateTime TimeBegin;
-        //public DateTime TimeEnd;
+        public DateTime TimeBegin;
+        public DateTime TimeEnd;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -86,10 +86,11 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Description" Width="1*"  Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Correct" Width="1*"  Binding="{Binding Correct}"/>
                 <DataGridTemplateColumn Header="Choice" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Choice}" SelectedIndex="0"/>
+                            <ComboBox ItemsSource="{Binding Choice}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

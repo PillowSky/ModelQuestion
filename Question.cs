@@ -10,6 +10,7 @@ namespace ModelQuestion {
         public string TextFile { get; set; }
         public string Description { get; set; }
         public string[] Choice { get; set; }
+        public string Correct { get; set; }
         public string Selected { get; set; }
 
         public static Question[] LoadQuestion(string dir) {
@@ -17,6 +18,7 @@ namespace ModelQuestion {
 
             string[] files = Directory.GetFiles(dir);
             Dictionary<string, Question> dict = new Dictionary<string, Question>();
+            Random rng = new Random();
 
             foreach (string filename in files) {
                 string realname = Path.GetFileNameWithoutExtension(filename);
@@ -33,7 +35,8 @@ namespace ModelQuestion {
                     try {
                         string[] lines = File.ReadAllLines(filename);
                         q.Description = lines[0];
-                        q.Choice = lines.Skip(1).ToArray();
+                        q.Correct = lines[1];
+                        q.Choice = lines.Skip(1).OrderBy(l => rng.Next()).ToArray();
 
                         q.Name = realname;
                         q.TextFile = filename;
