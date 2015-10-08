@@ -29,13 +29,16 @@ namespace ModelQuestion {
             if (Model.Current.Selected == null) {
                 MessageBox.Show("Please select to continue", "Please select to continue", MessageBoxButton.OK, MessageBoxImage.Stop);
             } else {
-                if (Model.Index + 1 < Model.QuestionCount) {
+                if (Model.Index + 1 < Model.CaseCount) {
                     Model.Index++;
                 } else {
                     if (MessageBox.Show("Are you sure to submit?", "Are you sure to sumit?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
                         Model.TimeEnd = DateTime.Now;
                         QuestionIO.StoreQuestion(Model);
                         MessageBox.Show("Test result saved to " + Model.Path, "Test result saved", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        MainWindow window = new MainWindow(Model);
+                        window.Show();
                         Close();
                     }
                 }

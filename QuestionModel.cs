@@ -10,10 +10,11 @@ namespace ModelQuestion {
         private string _directory;
         private string _path;
         private bool _isRandom;
-        private int _questionCount;
+        private int _caseCount;
         private int _index;
         private Question _current;
         private Question[] _questions;
+        private Question[] _cases;
 
         public string Directory {
             get {
@@ -47,13 +48,13 @@ namespace ModelQuestion {
             }
         }
 
-        public int QuestionCount {
+        public int CaseCount {
             get {
-                return _questionCount;
+                return _caseCount;
             }
             set {
-                _questionCount = value;
-                NotifyPropertyChanged("QuestionCount");
+                _caseCount = value;
+                NotifyPropertyChanged("CaseCount");
             }
         }
 
@@ -88,8 +89,19 @@ namespace ModelQuestion {
                 NotifyPropertyChanged("Questions");
                 NotifyPropertyChanged("IsReady");
 
-                QuestionCount = value.Length;
-                Current = value.FirstOrDefault();           
+                CaseCount = value.Length;
+            }
+        }
+
+        public Question[] Cases {
+            get {
+                return _cases;
+            }
+            set {
+                _cases = value;
+                NotifyPropertyChanged("Cases");
+
+                Current = value.FirstOrDefault();
             }
         }
 

@@ -46,7 +46,6 @@ namespace ModelQuestion {
         public static void StoreQuestion(QuestionModel model) {
             const string TEXT_EXT = ".txt";
             const string CSV_EXT = ".csv";
-            const string EXCEL_EXT = ".xlsx";
 
             switch (Path.GetExtension(model.Path)) {
                 case TEXT_EXT:
@@ -56,25 +55,24 @@ namespace ModelQuestion {
                         file.WriteLine(string.Format("TimeBegin: {0}\t\tTimeEnd: {1}", model.TimeBegin, model.TimeEnd));
                         file.WriteLine();
 
-                        foreach (Question q in model.Questions) {
+                        foreach (Question q in model.Cases) {
                             file.WriteLine(string.Format("Name: {0}, Correct: {1}, Selected: {2}, Right: {3}", q.Name, q.Correct, q.Selected, (q.Selected == q.Correct ? "Yes" : "No")));
                         }
                         
-                        int correct = model.Questions.Count(q => q.Selected == q.Correct);
+                        int correct = model.Cases.Count(q => q.Selected == q.Correct);
                         file.WriteLine();
                         file.WriteLine("Summary:");
-                        file.WriteLine("QuestionCount: {0}, CorrectCount: {1}, CorrectRate: {2}", model.Questions.Length, correct, (float)correct / model.Questions.Length);
+                        file.WriteLine("CaseCount: {0}, CorrectCount: {1}, CorrectRate: {2}", model.CaseCount, correct, (float)correct / model.CaseCount);
                     };
                     break;
+
                 case CSV_EXT:
                     using (StreamWriter file = new StreamWriter(model.Path)) {
                         file.WriteLine("Name,Selected,Correct Right");
-                        foreach (Question q in model.Questions) {
+                        foreach (Question q in model.Cases) {
                             file.WriteLine(string.Format("{0},{1},{2},{3}", q.Name, q.Correct, q.Selected, (q.Selected == q.Correct ? "Yes" : "No")));
                         }
                     };
-                    break;
-                case EXCEL_EXT:
                     break;
             }
         }

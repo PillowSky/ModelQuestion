@@ -13,7 +13,7 @@
             <TextBlock.Text>
                 <MultiBinding StringFormat="Progress: {0} / {1}">
                     <Binding Path="NatureIndex"></Binding>
-                    <Binding Path="QuestionCount"></Binding>
+                    <Binding Path="CaseCount"></Binding>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
@@ -23,7 +23,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ProgressBar Grid.Column="1" Value="{Binding NatureIndex}" Maximum="{Binding QuestionCount}"/>
+            <ProgressBar Grid.Column="1" Value="{Binding NatureIndex}" Maximum="{Binding CaseCount}"/>
         </Grid>
         <Grid Grid.Row="2" Margin="0,10">
             <Grid.ColumnDefinitions>

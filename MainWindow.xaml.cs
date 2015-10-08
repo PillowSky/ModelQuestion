@@ -22,6 +22,11 @@ namespace ModelQuestion {
             this.DataContext = Model = new QuestionModel();
         }
 
+        public MainWindow(QuestionModel model) {
+            InitializeComponent();
+            this.DataContext = Model = model;
+        }
+
         private void DirectoryButton_Click(object sender, RoutedEventArgs e) {
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
@@ -36,18 +41,25 @@ namespace ModelQuestion {
 
         private void PathButton_Click(object sender, RoutedEventArgs e) {
             System.Windows.Forms.SaveFileDialog dialog = new System.Windows.Forms.SaveFileDialog();
-            dialog.DefaultExt = "xlsx";
-            dialog.Filter = "Excel Worksheet (*.xlsx)|*.xlsx|Comma Separated Values (*.csv)|*.csv|Text Files (*.txt)|*.txt";
+            dialog.DefaultExt = "txt";
+            dialog.Filter = "Text Files (*.txt)|*.txt|Comma Separated Values (*.csv)|*.csv";
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 Model.Path = dialog.FileName;
+
+                if (Model.Cases != null) {
+                    QuestionIO.StoreQuestion(Model);
+                    MessageBox.Show("Test result saved to " + Model.Path, "Test result saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e) {
             if (Model.IsRandom) {
                 Random rng = new Random();
-                Model.Questions = Model.Questions.OrderBy(q => rng.Next()).Take(Model.QuestionCount).ToArray();
+                Model.Cases = Model.Questions.OrderBy(q => rng.Next()).Take(Model.CaseCount).ToArray();
+            } else {
+                Model.Cases = Model.Questions;
             }
 
             QuestionWindow window = new QuestionWindow(Model);

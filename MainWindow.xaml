@@ -107,7 +107,7 @@
             <Label Content="{Binding Questions.Length, TargetNullValue=0}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
             <RadioButton x:Name="SerialRadio" Content="Serial" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True"/>
             <RadioButton x:Name="RandomRadio" Content="Random" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsRandom}"/>
-            <ScrollBar x:Name="CaseCount" Style="{DynamicResource Spinner}" Minimum="1" Maximum="{Binding Questions.Length}" SmallChange="1" Grid.Column="2" IsEnabled="{Binding IsRandom}" Value="{Binding QuestionCount}"/>
+            <ScrollBar x:Name="CaseCount" Style="{DynamicResource Spinner}" Minimum="1" Maximum="{Binding Questions.Length}" SmallChange="1" Grid.Column="2" IsEnabled="{Binding IsRandom}" Value="{Binding CaseCount}"/>
             <Button x:Name="StartButton" Content="Start Test" Grid.Column="3" Click="StartButton_Click"/>
         </Grid>
     </Grid>
