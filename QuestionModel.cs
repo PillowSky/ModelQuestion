@@ -8,6 +8,13 @@ using System.ComponentModel;
 namespace ModelQuestion {
     public class QuestionModel : INotifyPropertyChanged {
         private string _directory;
+        private string _path;
+        private bool _isRandom;
+        private int _questionCount;
+        private int _index;
+        private Question _current;
+        private Question[] _questions;
+
         public string Directory {
             get {
                 return _directory;
@@ -19,7 +26,6 @@ namespace ModelQuestion {
             }
         }
 
-        private string _path;
         public string Path {
             get {
                 return _path;
@@ -31,20 +37,6 @@ namespace ModelQuestion {
             }
         }
 
-        private Question[] _questions;
-        public Question[] Questions {
-            get {
-                return _questions;
-            }
-            set {
-                _questions = value;
-                ProblemCount = value.Length;
-                NotifyPropertyChanged("Questions");
-                NotifyPropertyChanged("IsReady");
-            }
-        }
-
-        private bool _isRandom;
         public bool IsRandom {
             get {
                 return _isRandom;
@@ -55,42 +47,30 @@ namespace ModelQuestion {
             }
         }
 
-        private int _problemCount;
-        public int ProblemCount {
+        public int QuestionCount {
             get {
-                return _problemCount;
+                return _questionCount;
             }
             set {
-                _problemCount = value;
-                NotifyPropertyChanged("ProblemCount");
-                NotifyPropertyChanged("ProblemMax");
+                _questionCount = value;
+                NotifyPropertyChanged("QuestionCount");
             }
         }
 
-        public int ProblemMax {
+        public int Index {
             get {
-                return _problemCount - 1;
+                return _index;
+            }
+            set {
+                _index = value;
+                NotifyPropertyChanged("Index");
+                Current = _questions[value];
             }
         }
 
-        public bool IsReady {
+        public Question Current {
             get {
-                return _questions != null && _questions.Length > 0 && _path != null;
-            }
-        }
-
-        public DateTime TimeBegin;
-        public DateTime TimeEnd;
-        public Answer[] Answers { get; set; }
-
-        private Answer _current;
-        public Answer Current {
-            get {
-                if (_current == null) {
-                    return Answers[0];
-                } else {
-                    return _current;
-                }
+                return _current;
             }
             set {
                 _current = value;
@@ -98,17 +78,35 @@ namespace ModelQuestion {
             }
         }
 
-        private int _index;
-        public int Index {
+        public Question[] Questions {
             get {
-                return _index;
+                return _questions;
             }
             set {
-                _index = value;
-                Current = Answers[value];
-                NotifyPropertyChanged("Index");
+                _questions = value;
+                NotifyPropertyChanged("Questions");
+                NotifyPropertyChanged("IsReady");
+
+                QuestionCount = value.Length;
+                Current = value.FirstOrDefault();           
             }
         }
+
+        public bool IsReady {
+            get {
+                return _directory != null && _path != null && _questions != null && _questions.Length > 0;
+            }
+        }
+
+        public int QuestionMax {
+            get {
+                return _questionCount - 1;
+            }
+        }
+
+        //public DateTime TimeBegin;
+        //public DateTime TimeEnd;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChanged(string propertyName) {

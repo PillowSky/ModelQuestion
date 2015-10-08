@@ -71,10 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Answer.cs" />
-    <Compile Include="FilePair.cs" />
     <Compile Include="Question.cs" />
-    <Compile Include="QuestionLoader.cs" />
     <Compile Include="QuestionModel.cs" />
     <Compile Include="QuestionWindow.xaml.cs">
       <DependentUpon>QuestionWindow.xaml</DependentUpon>

@@ -13,7 +13,7 @@
             <TextBlock.Text>
                 <MultiBinding StringFormat="Progress: {0} / {1}">
                     <Binding Path="Index"></Binding>
-                    <Binding Path="ProblemMax"></Binding>
+                    <Binding Path="QuestionMax"></Binding>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
@@ -27,7 +27,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ProgressBar Grid.Row="0" Grid.Column="1" Value="{Binding Index}" Maximum="{Binding ProblemMax}"/>
+            <ProgressBar Grid.Row="0" Grid.Column="1" Value="{Binding Index}" Maximum="{Binding QuestionMax}"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -40,7 +40,7 @@
                     <RowDefinition Height="8*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Current.Detail}"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Current.Description}"/>
                 <ComboBox Grid.Row="1" ItemsSource="{Binding Current.Choice}" SelectedValue="{Binding Current.Selected}"/>
             </Grid>
         </Grid>

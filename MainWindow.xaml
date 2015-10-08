@@ -85,12 +85,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Detail" Width="1*"  Binding="{Binding Detail}"/>
-                <DataGridTextColumn Header="Answer" Width="1*" Binding="{Binding Answer}"/>
-                <DataGridTemplateColumn Header="Other" Width="1*">
+                <DataGridTextColumn Header="Description" Width="1*"  Binding="{Binding Description}"/>
+                <DataGridTemplateColumn Header="Choice" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Other}" SelectedIndex="0"/>
+                            <ComboBox ItemsSource="{Binding Choice}" SelectedIndex="0"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -107,7 +106,7 @@
             <Label Content="{Binding Questions.Length, TargetNullValue=0}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
             <RadioButton x:Name="SerialRadio" Content="Serial" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True"/>
             <RadioButton x:Name="RandomRadio" Content="Random" GroupName="TestMode" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsRandom}"/>
-            <ScrollBar x:Name="CaseCount" Style="{DynamicResource Spinner}" Minimum="1" Maximum="{Binding Questions.Length}" SmallChange="1" Grid.Column="2" IsEnabled="{Binding IsRandom}" Value="{Binding ProblemCount}"/>
+            <ScrollBar x:Name="CaseCount" Style="{DynamicResource Spinner}" Minimum="1" Maximum="{Binding Questions.Length}" SmallChange="1" Grid.Column="2" IsEnabled="{Binding IsRandom}" Value="{Binding QuestionCount}"/>
             <Button x:Name="StartButton" Content="Start Test" Grid.Column="3" Click="StartButton_Click"/>
         </Grid>
     </Grid>

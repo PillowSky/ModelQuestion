@@ -17,7 +17,7 @@ namespace ModelQuestion {
     /// Interaction logic for QuestionWindow.xaml
     /// </summary>
     public partial class QuestionWindow : Window {
-        private QuestionModel Model;
+        public QuestionModel Model;
 
         public QuestionWindow(QuestionModel model) {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace ModelQuestion {
             if (Model.Current.Selected == null) {
                 MessageBox.Show("Select a choice to continue", "Select a choice to continue", MessageBoxButton.OK, MessageBoxImage.Stop);
             } else {
-                if (Model.Index + 1 < Model.ProblemCount) {
+                if (Model.Index + 1 < Model.QuestionCount) {
                     Model.Index++;
                 }
             }
@@ -42,7 +42,7 @@ namespace ModelQuestion {
 
         private void Submit_Click(object sender, RoutedEventArgs e) {
             if (MessageBox.Show("Are you sure to submit?", "Are you sure to sumit?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
-                foreach (var a in Model.Answers) {
+                foreach (var a in Model.Questions) {
                     Console.WriteLine(a.Selected);
                 }
             }

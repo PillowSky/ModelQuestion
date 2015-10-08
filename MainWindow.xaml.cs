@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace ModelQuestion {
     public partial class MainWindow : Window {
-        private QuestionModel Model;
+        public QuestionModel Model;
 
         public MainWindow() {
             InitializeComponent();
@@ -26,10 +26,10 @@ namespace ModelQuestion {
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 Model.Directory = dialog.SelectedPath;
-                Model.Questions = QuestionLoader.LoadQuestion(dialog.SelectedPath);
+                Model.Questions = Question.LoadQuestion(dialog.SelectedPath);
                 
                 if (Model.Questions.Length == 0) {
-                    MessageBox.Show("No usable test case, the directory choosed is incorrect", "Incorrect directory", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show("No available test case, the directory choosed is incorrect", "Incorrect directory", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -47,9 +47,7 @@ namespace ModelQuestion {
         private void StartButton_Click(object sender, RoutedEventArgs e) {
             if (Model.IsRandom) {
                 Random rng = new Random();
-                Model.Answers = Model.Questions.OrderBy(q => rng.Next()).Take(Model.ProblemCount).Select(p => new Answer(p)).ToArray();
-            } else {
-                Model.Answers = Model.Questions.Select(p => new Answer(p)).ToArray();
+                Model.Questions = Model.Questions.OrderBy(q => rng.Next()).Take(Model.QuestionCount).ToArray();
             }
 
             QuestionWindow window = new QuestionWindow(Model);
