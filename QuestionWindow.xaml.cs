@@ -13,9 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace ModelQuestion {
-    /// <summary>
-    /// Interaction logic for QuestionWindow.xaml
-    /// </summary>
     public partial class QuestionWindow : Window {
         private QuestionModel Model;
 

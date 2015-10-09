@@ -41,7 +41,7 @@ namespace ModelQuestion {
                 }
             }
 
-            return dict.Values.Where(q => q.ImageFile != null && q.TextFile != null && q.Choice.Length > 0).ToArray();
+            return dict.Values.Where(q => q.ImageFile != null && q.TextFile != null).ToArray();
         }
 
         public static void StoreQuestion(QuestionModel model) {
