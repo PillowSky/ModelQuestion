@@ -7,6 +7,15 @@
 
         <System:String x:Key="SelectDirectory">Select Directory</System:String>
         <System:String x:Key="SavePath">Save Path</System:String>
+        <System:String x:Key="StartTest">Start Test</System:String>
+        <System:String x:Key="BadDirectoryText">No available test case</System:String>
+        <System:String x:Key="BadDirectoryTitle">Bad directory</System:String>
+        <System:String x:Key="ResultSavedText">Test result has been saved to </System:String>
+        <System:String x:Key="ResultSavedTitle">Test result saved</System:String>
+        <System:String x:Key="PleaseSelectText">Please select to continue</System:String>
+        <System:String x:Key="PleaseSelectTitle">Please select to continue</System:String>
+        <System:String x:Key="ConfirmSubmitText">Are you sure to submit?</System:String>
+        <System:String x:Key="ConfirmSubmitTitle">Are you sure to submit?</System:String>
 
     </Application.Resources>
 </Application>

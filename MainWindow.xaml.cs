@@ -19,12 +19,12 @@ namespace ModelQuestion {
 
         public MainWindow() {
             InitializeComponent();
-            this.DataContext = Model = new QuestionModel();
+            DataContext = Model = new QuestionModel();
         }
 
         public MainWindow(QuestionModel model) {
             InitializeComponent();
-            this.DataContext = Model = model;
+            DataContext = Model = model;
         }
 
         private void DirectoryButton_Click(object sender, RoutedEventArgs e) {
@@ -32,9 +32,9 @@ namespace ModelQuestion {
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 Model.Directory = dialog.SelectedPath;
                 Model.Questions = QuestionIO.LoadQuestion(dialog.SelectedPath);
-                
+
                 if (Model.Questions.Length == 0) {
-                    MessageBox.Show("No available test case, the directory choosed is incorrect", "Incorrect directory", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    MessageBox.Show(FindResource("BadDirectoryText") as string, FindResource("BadDirectoryTitle") as string, MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -42,14 +42,14 @@ namespace ModelQuestion {
         private void PathButton_Click(object sender, RoutedEventArgs e) {
             System.Windows.Forms.SaveFileDialog dialog = new System.Windows.Forms.SaveFileDialog();
             dialog.DefaultExt = "txt";
-            dialog.Filter = "Text Files (*.txt)|*.txt|Comma Separated Values (*.csv)|*.csv";
+            dialog.Filter = "Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv";
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 Model.Path = dialog.FileName;
 
                 if (Model.Cases != null) {
                     QuestionIO.StoreQuestion(Model);
-                    MessageBox.Show("Test result saved to " + Model.Path, "Test result saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(FindResource("ResultSavedText") as string + Model.Path, FindResource("ResultSavedTitle") as string, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

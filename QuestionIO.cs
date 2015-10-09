@@ -5,9 +5,10 @@ using System.Linq;
 
 namespace ModelQuestion {
     public class QuestionIO {
-        public static Question[] LoadQuestion(string dir) {
-            const string TEXT_EXT = ".txt";
+        public const string TEXT_EXT = ".txt";
+        public const string CSV_EXT = ".csv";
 
+        public static Question[] LoadQuestion(string dir) {
             string[] files = Directory.GetFiles(dir);
             Dictionary<string, Question> dict = new Dictionary<string, Question>();
             Random rng = new Random();
@@ -44,9 +45,6 @@ namespace ModelQuestion {
         }
 
         public static void StoreQuestion(QuestionModel model) {
-            const string TEXT_EXT = ".txt";
-            const string CSV_EXT = ".csv";
-
             switch (Path.GetExtension(model.Path)) {
                 case TEXT_EXT:
                     using (StreamWriter file = new StreamWriter(model.Path)) {

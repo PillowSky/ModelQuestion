@@ -19,23 +19,28 @@ namespace ModelQuestion {
     public partial class QuestionWindow : Window {
         private QuestionModel Model;
 
+        public QuestionWindow() {
+            InitializeComponent();
+            DataContext = Model = new QuestionModel();
+        }
+
         public QuestionWindow(QuestionModel model) {
             InitializeComponent();
-            this.DataContext = Model = model;
+            DataContext = Model = model;
             Model.TimeBegin = DateTime.Now;
         }
 
         private void Next_Click(object sender, RoutedEventArgs e) {
             if (Model.Current.Selected == null) {
-                MessageBox.Show("Please select to continue", "Please select to continue", MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show(FindResource("PleaseSelectText") as string, FindResource("PleaseSelectTitle") as string, MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
                 if (Model.Index + 1 < Model.CaseCount) {
                     Model.Index++;
                 } else {
-                    if (MessageBox.Show("Are you sure to submit?", "Are you sure to sumit?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+                    if (MessageBox.Show(FindResource("ConfirmSubmitText") as string, FindResource("ConfirmSubmitTitle") as string, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
                         Model.TimeEnd = DateTime.Now;
                         QuestionIO.StoreQuestion(Model);
-                        MessageBox.Show("Test result saved to " + Model.Path, "Test result saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show(FindResource("ResultSavedText") as string + Model.Path, FindResource("ResultSavedTitle") as string, MessageBoxButton.OK, MessageBoxImage.Information);
 
                         MainWindow window = new MainWindow(Model);
                         window.Show();
